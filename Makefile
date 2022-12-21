@@ -41,7 +41,7 @@ frontend-clear:
 frontend-init: frontend-npm-install
 
 frontend-npm-install:
-	docker compose run --rm phonebook-ann-node-cli npm instal
+	docker compose run --rm phonebook-ann-node-cli yarn install
 
 frontend-ready:
 	docker run --rm -v ${PWD}:/app -w /app alpine touch .ready
