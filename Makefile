@@ -47,7 +47,7 @@ frontend-ready:
 	docker run --rm -v ${PWD}:/app -w /app alpine touch .ready
 
 frontend-lint:
-	docker compose run --rm phonebook-ann-node-cli npm run lint
+	docker compose run --rm phonebook-ann-node-cli yarn run lint
 #	docker compose run --rm phonebook-ann-node-cli yarn stylelint
 
 frontend-lint-fix:
