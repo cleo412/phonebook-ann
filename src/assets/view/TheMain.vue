@@ -1,16 +1,20 @@
 <script setup>
 import TheHeader from "../../components/TheHeader.vue";
 import TheElem from "../../components/TheElem.vue";
+import { storeToRefs } from 'pinia';
 
 import { useEmplStore } from "../../stores/EmplStore";
-const EmplStore = useEmplStore();
+
+const { empls } = storeToRefs(useEmplStore());
+const EmplStore = empls;
+console.log(EmplStore);
 </script>
 
 <template>
   <TheHeader />
   <TheElem
-    v-for="(employee, index) of employees"
-    :key="index"
+    v-for="(employee, index) of empls"
+    :key="employee.id"
     :employee="employee"
     @delEmpl="deleteEmpl(index)"
   />
@@ -26,8 +30,8 @@ export default {
     };
   },
   created() {
-    //  console.log(this.EmplStore.getEmplTelephone);
-    this.employees = this.EmplStore.empls;
+    //console.log(empls);
+    //this.employees = empls;
   },
 
   computed: {
