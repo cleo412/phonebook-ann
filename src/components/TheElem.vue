@@ -1,7 +1,25 @@
 <script setup>
+import { useEmplStore } from ".././stores/EmplStore";
+import { mapState } from "pinia";
+// import { storeToRefs } from "pinia";
 import { RouterLink } from "vue-router";
+
 import IconDelete from "./IconDelete.vue";
 import IconFullinfo from "./IconFullinfo.vue";
+
+// const { employeesData } = storeToRefs(useEmplStore());
+const employeesData = useEmplStore(); // eslint-disable-line
+
+const props = defineProps({ // eslint-disable-line
+  employee: {
+    id: { type: Number, required: true },
+    cn: { type: String, required: true },
+    title: { type: String, required: true },
+    email: { type: String, required: true },
+    telephone: { type: String, required: true },
+    mobile: { type: String, required: true },
+  },
+});
 </script>
 
 <template>
@@ -14,16 +32,18 @@ import IconFullinfo from "./IconFullinfo.vue";
 
     <li class="position">{{ employee.title }}</li>
     <li class="email">{{ employee.email }}</li>
-    <li class="phone">{{ employee.telephone }}</li>
-    <li class="mobile">{{ getEmplMobile }}</li>
 
-    <li class="employee_status" :class="{ active: employee.hide }">
+    <!-- форматинование номера геттерами-->
+    <li class="phone">{{ getEmplTelephone(employee.id) }}</li>
+    <li class="mobile">{{ getEmplMobile(employee.id) }}</li>
+
+    <li class="employee_status" :class="{ active: !employee.hide }">
       {{ getEmplStatus }}
     </li>
     <li>
       <RouterLink
         :to="{
-          name: 'TheCard',
+          name: 'card',
           params: { id: employee.id },
         }"
       >
@@ -46,32 +66,12 @@ import IconFullinfo from "./IconFullinfo.vue";
 
 <script>
 export default {
-  props: {
-    employee: {
-      id: { type: Number, required: true },
-      cn: { type: String, required: true },
-      title: { type: String, required: true },
-      email: { type: String, required: true },
-      telephone: { type: String, required: true },
-      mobile: { type: String, required: true },
-    },
-  },
   computed: {
+    // использую mapState (раздел без setup() в конце страницы) по https://pinia.vuejs.org/core-concepts/getters.html#with-setup
+    ...mapState(useEmplStore, ["getEmplTelephone", "getEmplMobile"]),
+
     getEmplStatus() {
       return this.employee.hide == true ? "online" : "offline";
-    },
-    getEmplTelephone() {
-      return (this.telephone = this.employee.telephone
-        .match(/.{2}/g)
-        .join("-"));
-    },
-    getEmplMobile() {
-      return (this.mobile = this.employee.mobile
-        .split("")
-        .reduce(
-          (accumulator, elem) => accumulator.replace("x", elem),
-          "xxx xxx-xx-xx"
-        ));
     },
   },
 };
@@ -109,14 +109,14 @@ export default {
 .employee_status {
   display: flex;
   justify-content: center;
-  width: 50%;
+  width: 60px;
   color: var(--vt-c-white);
   font-size: 12px;
   line-height: 15px;
   opacity: 0.6;
   background-color: var(--vt-c-grey-silver);
   border-radius: 17px;
-  padding: 3px 8px;
+  padding: 3px 10px;
   margin: 0 auto;
 }
 

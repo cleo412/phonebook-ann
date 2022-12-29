@@ -1,52 +1,29 @@
 <script setup>
 import TheHeader from "../../components/TheHeader.vue";
 import TheElem from "../../components/TheElem.vue";
-import { storeToRefs } from 'pinia';
 
 import { useEmplStore } from "../../stores/EmplStore";
-
-const { empls } = storeToRefs(useEmplStore());
-const EmplStore = empls;
-console.log(EmplStore);
+const employeesData = useEmplStore();
 </script>
 
 <template>
   <TheHeader />
   <TheElem
-    v-for="(employee, index) of empls"
+    v-for="employee of employeesData.employees"
     :key="employee.id"
     :employee="employee"
-    @delEmpl="deleteEmpl(index)"
+    @click="employeesData.deleteEmpl(employee.id)"
   />
 
-  <h2 class="message">{{ showMessage }}</h2>
+  <h2 class="message"></h2>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      employees: [],
-    };
-  },
-  created() {
-    //console.log(empls);
-    //this.employees = empls;
-  },
-
-  computed: {
-    showMessage() {
-      return this.employees.length === 0 ? "Список сотрудников пуст" : "";
-    },
-  },
-
-  methods: {
-    deleteEmpl(index) {
-      this.employees.splice(index, 1);
-    },
-  },
+  components: { TheHeader, TheElem },
 };
 </script>
+
 <style scoped>
 .message {
   color: var(--vt-c-grey-font);

@@ -15,6 +15,9 @@
   --vt-c-active-btn: rgba(95, 158, 160, 1);
 }
 
+* {
+  box-sizing: border-box;
+}
 body {
   min-width: 768px;
   min-height: 100vh;
@@ -26,6 +29,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 svg {
   display: flex;

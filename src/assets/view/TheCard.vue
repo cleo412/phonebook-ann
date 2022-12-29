@@ -1,6 +1,5 @@
 <script setup>
-import { useEmplStore } from "../../stores/EmplStore";
-const EmplStore = useEmplStore();
+// ТУТ ПОКА НЕ РАБОТАЕТ, НЕ ЗАНИМАЛАСЬ ЭТОЙ СТРАНИЦЕЙ ПОСЛЕ ПОДКЛЮЧЕНИЯ PINIA)
 </script>
 
 <template>
@@ -9,7 +8,7 @@ const EmplStore = useEmplStore();
       <div class="photo" width="128" height="128"></div>
 
       <div class="wrapper">
-        <label for="last_name">SURNAME:</label>
+        <label for="last_name">ФАМИЛИЯ:</label>
         <input
           id="last_name"
           name="last_name"
@@ -20,7 +19,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="first_name">NAME:</label>
+        <label for="first_name">ИМЯ:</label>
         <input
           id="first_name"
           name="first_name"
@@ -30,7 +29,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="middle_name">PATRONYMIC :</label>
+        <label for="middle_name">ОТЧЕСТВО :</label>
         <input
           id="middle_name"
           name="middle_name"
@@ -52,7 +51,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper wrapper_phone">
-        <label for="phone">PHONE:</label>
+        <label for="phone">ВНУТ.ТЕЛЕФОН:</label>
         <input
           id="phone"
           name="phone"
@@ -62,7 +61,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="gender">GENDER:</label>
+        <label for="gender">ПОЛ:</label>
         <select id="gender" v-model="empl.gender" :disabled="disabled">
           <option>male</option>
           <option>female</option>
@@ -71,7 +70,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper wrapper_email">
-        <label for="email">EMAIL:</label>
+        <label for="email">ЭЛ. ПОЧТА:</label>
         <input
           id="email"
           name="email"
@@ -81,7 +80,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="born">BIRTH:</label>
+        <label for="born">ДАТА РОЖДЕНИЯ:</label>
         <input
           id="born"
           name="born"
@@ -91,7 +90,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper" wrapper_mobile>
-        <label for="mobile">MOBILE:</label>
+        <label for="mobile">МОБ.ТЕЛЕФОН:</label>
         <input
           id="mobile"
           name="mobile"
@@ -103,12 +102,12 @@ const EmplStore = useEmplStore();
 
     <fieldset class="container">
       <div class="wrapper">
-        <label for="company">CITY:</label>
+        <label for="company">ГОРОД:</label>
         <input id="city" name="city" v-model="empl.city" :disabled="disabled" />
       </div>
 
       <div class="wrapper">
-        <label for="company">COMPANY:</label>
+        <label for="company">КОМПАНИЯ:</label>
         <input
           id="company"
           name="company"
@@ -118,7 +117,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="department">DEPATMENT:</label>
+        <label for="department">ДЕПАРТАМЕНТ:</label>
         <input
           id="department"
           name="department"
@@ -128,7 +127,7 @@ const EmplStore = useEmplStore();
       </div>
 
       <div class="wrapper">
-        <label for="position">POSITION:</label>
+        <label for="position">ДОЛЖНОСТЬ:</label>
         <input
           id="position"
           type="text"
@@ -139,13 +138,7 @@ const EmplStore = useEmplStore();
       </div>
     </fieldset>
 
-    <button
-      type="button"
-      class="button btn_edit"
-      @click="sendUpdateEmplToStore"
-    >
-      Edit employee
-    </button>
+    <button type="button" class="button btn_edit">Edit employee</button>
   </form>
 </template>
 
@@ -159,19 +152,7 @@ export default {
   },
 
   created() {
-    // Id from the router (RouterLink in TheElem)
     this.paramsId = this.$route.params.id;
-
-    //obj in EmplStore
-    const empl = this.EmplStore.empls.find((elem, index) => {
-      if (elem.id == this.paramsId) {
-        this.index = index;
-        return true;
-      }
-      return false;
-    });
-
-    this.empl = empl;
   },
 };
 </script>
