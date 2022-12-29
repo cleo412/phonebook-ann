@@ -12,10 +12,14 @@ const router = createRouter({
     },
     {
       path: "/card/:id",
-      name: "TheCard",
+      name: "card",
       component: TheCard,
       props: true,
     },
+    // {
+    //   path: "/:any(.*)",
+    //   component: TheError404,
+    // },
   ],
 });
 

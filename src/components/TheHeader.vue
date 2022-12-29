@@ -47,7 +47,7 @@ form {
 }
 .search {
   position: relative;
-  width: 40%;
+  width: 380px;
   color: var(--vt-c-grey-font);
   border-radius: 17px;
   border: none;
@@ -57,7 +57,7 @@ form {
 .btn_search {
   position: absolute;
   top: 4px;
-  left: 37%;
+  left: 340px;
   width: 30px;
   height: 30px;
   border: none;
