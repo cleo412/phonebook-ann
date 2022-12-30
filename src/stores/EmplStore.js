@@ -31,4 +31,9 @@ export const useEmplStore = defineStore("EmplStore", {
       };
     },
   },
+  actions: {
+    deleteEmpl(id) {
+      this.employees = this.employees.filter((elem) => elem.id !== id);
+    },
+  },
 });
